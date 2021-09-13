@@ -58,7 +58,7 @@ def normalizador():
     for nome in os.listdir(path):
         regex_pattern = "|".join(map(re.escape, delimiters))
         dados = list(re.split(regex_pattern, unidecode(str(nome))))
-        extensao = "." + dados[len(dados) - 1]
+        extensao = "." + dados[-1]
         dados.pop()
         dados = list(map(lambda x: re.sub("([A-Z])", r" \g<0>", x), dados))
         dados = list(re.split("(\\d)+", str(" ".join(dados))))
@@ -134,7 +134,7 @@ X - Voltar ao menu anterior\n: '.format(path))
 
     for nome in directory:
         dados = nome.split(".")
-        extensao = "." + dados[len(dados) - 1]
+        extensao = "." + dados[-1]
         dados.pop()
         novo_padrao = input("\n\nType the new default name to \
 rename all files with a number index: ")
@@ -151,7 +151,7 @@ def semi_automatic():
 
     for nome in os.listdir(path):
         dados = nome.split(".")
-        extensao = "." + dados[len(dados) - 1]
+        extensao = "." + dados[-1]
         dados.pop()
         nome_sem = "_".join(dados)
         explicacoes(4)
