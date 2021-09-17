@@ -9,14 +9,12 @@ def main():
     print("###### RENOMEADOR DE ARQUIVOS ######")
     while 1:
         print("#" * 40)
-        opcaohub = input(
-            "\
+        opcaohub = input("\
 1 - Normalizer\n\
 2 - Semi-Automatic renamer\n\
 3 - Rename in Order\n\
 4 - Info\n\
-5 - Sair\n:  "
-        )
+5 - Sair\n:  ")
         if opcaohub == "1":
             normalizador()
         if opcaohub == "2":
@@ -42,11 +40,9 @@ def normalizador():
     opcao = 0
     while 1:
         print("#" * 40)
-        opcao = input(
-            "Convert all the files name to:\n1 - camelCase\n2\
+        opcao = input("Convert all the files name to:\n1 - camelCase\n2\
  - UpperCamelCase\n3 - snake_case\n4 - Spaces\n5 - Voltar ao Menu Anterior\n\
-6 - Exit\n:  "
-        )
+6 - Exit\n:  ")
         if opcao in ("1", "2", "3"):
             break
         if opcao == "4":
@@ -115,16 +111,12 @@ def em_ordem():
     path = os.getcwd() + "/"
     while 1:
         print("#" * 40)
-        opcao = input(
-            'Tem certeza que deseja renomear todos \
+        opcao = input('Tem certeza que deseja renomear todos \
 os arquivos no diretório "{}" ?\n(Esta é uma ação irreversível!!) \n\
 Y - Yes\n\
 N - No\n\
 i - Informações\n\
-X - Voltar ao menu anterior\n: '.format(
-                path
-            )
-        )
+X - Voltar ao menu anterior\n: '.format(path))
         if opcao in ("N", "n"):
             sys.exit()
         if opcao in ("i", "I"):
@@ -173,16 +165,13 @@ def semi_automatic():
             os.rename(path + nome, path + novo_nome + extensao)
             print("arquivo " + nome + " alterado para " + novo_nome + extensao)
             cont_y += 1
-    print(
-        "Voce renomeou %d arquivos e %d arquivos nao foram renomeados."
-        % (cont_y, cont_n)
-    )
+    print("Voce renomeou %d arquivos e %d arquivos nao foram renomeados." %
+          (cont_y, cont_n))
 
 
 def explicacoes(bloco):
     if bloco == 1:  # Hub Block
-        print(
-            "Welcome to rename HUB, now on explains of each functionality:\n\
+        print("Welcome to rename HUB, now on explains of each functionality:\n\
 First, you will execute this script while in the folder you want to rename\
 \nYour Actual folder: {} \n\
 Second, be atent if the folder have ONLY FILES\n\n\
@@ -194,33 +183,24 @@ Spaces, you select one and your files in directory will be Normalized.\n\n\
 \n3 - In Order Renamer: This option will rename your files in a padronized\
  format like:\n FileName1.py, FileName2.py .... FileNameNumber.py\n, \
 you choose the FileName, and the script will rename it if ordened numbers, \
-and the extension will be the same as before.".format(
-                os.getcwd()
-            )
-        )
+and the extension will be the same as before.".format(os.getcwd()))
     if bloco == "2":  # Normalizer Block
-        print(
-            "Choose one format to normalize all your files in directory, \
+        print("Choose one format to normalize all your files in directory, \
 camelCase - it will Make Different words capitalized, except the first, with \
 no spaces between then.\n\
 UpperCamelCase - Same as camelCase, but the first word is capitalized.\n\
 snake_case - All the words are lowercase and underscore separated.\n\
-Spaces - All the words are lowercase and separated by spaces."
-        )
+Spaces - All the words are lowercase and separated by spaces.")
         return
     if bloco == "3":  # In order Block
-        print(
-            "Simply choose the new filename that you want to rename \
+        print("Simply choose the new filename that you want to rename \
 your files, the script will rename all the files with that filename + a \
-number ordered in crescent order, the extension will be the same."
-        )
+number ordered in crescent order, the extension will be the same.")
         return
     if bloco == "4":  # Semi Authomatic Block
-        print(
-            "This make possible and easier to rename files with a name that \
+        print("This make possible and easier to rename files with a name that \
 you choose, you will receive the actual name and write the new name (DON'T \
-write the extension again, it will keep the same)."
-        )
+write the extension again, it will keep the same).")
 
 
 if __name__ == "__main__":
