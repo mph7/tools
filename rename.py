@@ -59,11 +59,10 @@ def normalizador():
             sys.exit()
         print("Please select a valid option.\n")
 
-    _idx = 0
-    for _idx, nome in enumerate(os.listdir(path)):
+    for nome in os.listdir(path):
         regex_pattern = "|".join(map(re.escape, delimiters))
         dados = list(re.split(regex_pattern, unidecode(str(nome))))
-        extensao = "." + dados[len(dados) - 1]
+        extensao = "." + dados[-1]
         dados.pop()
         dados = list(map(lambda x: re.sub("([A-Z])", r" \g<0>", x), dados))
         dados = list(re.split("(\\d)+", str(" ".join(dados))))
@@ -79,7 +78,8 @@ def normalizador():
             to_snake_case(path, nome_normalizado, extensao, nome)
         elif opcao == "4":
             to_spaces(path, nome_normalizado, extensao, nome)
-    print("{} files was renamed in total.".format(_idx))
+        cont += 1
+    print("{} files was renamed in total.".format(cont))
 
 
 def to_camel_case(path, nome_normalizado, extensao, nome):
@@ -140,19 +140,17 @@ X - Voltar ao menu anterior\n: '.format(
     directory = os.listdir(path)
     directory.sort()
 
-    _idx = 0
-    for _idx, nome in enumerate(directory):
+    for nome in directory:
         dados = nome.split(".")
-        extensao = "." + dados[len(dados) - 1]
+        extensao = "." + dados[-1]
         dados.pop()
-        novo_padrao = input(
-            "\n\nType the new default name to \
-rename all files with a number index: "
-        )
+        novo_padrao = input("\n\nType the new default name to \
+rename all files with a number index: ")
+        cont += 1
         novo_nome = novo_padrao + str(cont)
         os.rename(path + nome, path + novo_nome + extensao)
         print("arquivo " + nome + " alterado para " + novo_nome + extensao)
-    print("Voce renomeou {} arquivos.".format(_idx))
+    print("Voce renomeou {} arquivos.".format(cont))
 
 
 def semi_automatic():
@@ -161,11 +159,12 @@ def semi_automatic():
 
     for nome in os.listdir(path):
         dados = nome.split(".")
-        extensao = "." + dados[len(dados) - 1]
+        extensao = "." + dados[-1]
         dados.pop()
         nome_sem = "_".join(dados)
         explicacoes(4)
-        novo_nome = input("Nome Atual: {}\nNovo Nome: ".format(nome_sem + extensao))
+        novo_nome = input("Nome Atual: {}\nNovo Nome: ".format(nome_sem +
+                                                               extensao))
         print("#" * 40)
         if novo_nome == "":
             novo_nome = nome_sem
