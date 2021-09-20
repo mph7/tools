@@ -136,10 +136,8 @@ X - Voltar ao menu anterior\n: '.format(path))
         dados = nome.split(".")
         extensao = "." + dados[-1]
         dados.pop()
-        novo_padrao = input(
-            "\n\nType the new default name to \
-rename all files with a number index: "
-        )
+        novo_padrao = input("\n\nType the new default name to \
+rename all files with a number index: ")
         cont += 1
         novo_nome = novo_padrao + str(cont)
         os.rename(path + nome, path + novo_nome + extensao)
@@ -157,7 +155,8 @@ def semi_automatic():
         dados.pop()
         nome_sem = "_".join(dados)
         explicacoes(4)
-        novo_nome = input("Nome Atual: {}\nNovo Nome: ".format(nome_sem + extensao))
+        novo_nome = input("Nome Atual: {}\nNovo Nome: ".format(nome_sem +
+                                                               extensao))
         print("#" * 40)
         if novo_nome == "":
             novo_nome = nome_sem
