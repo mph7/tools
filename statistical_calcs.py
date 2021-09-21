@@ -105,10 +105,14 @@ def agrupados_hub():
     media = round(media_agrupados(soma_fi, soma_xifi), precisao)
     moda = round(moda_agrupados(dados), precisao)
     mediana = round(mediana_agrupados(dados, soma_fi), precisao)
+    desvio_padrao = desvio_padrao_agrupados(dados, media)
 
     print("Media: {}".format(media))
     print("Moda: {}".format(moda))
     print("Mediana: {}".format(mediana))
+    print(f"Desvio padrao: {desvio_padrao}")
+    print("Coeficiente de variaçao: {}".format(desvio_padrao / media) * 100)
+    print(f"Faixa normal entre {media-desvio_padrao} e {media + desvio_padrao}")
 
 
 def recebe_dados_agrupados(dados):
@@ -210,6 +214,15 @@ def mediana_agrupados(dados, soma_fi):
     return dados[index][0] + ((vc - faa) / dados[index][2]) * (
         dados[index][1] - dados[index][0]
     )
+
+
+def desvio_padrao_agrupados(dados, media):
+    somatoria = 0
+    for i, el in enumerate(dados):
+        somatoria += (el[4] ** 2) * el[2]
+    soma = somatoria / len(dados)
+    soma = soma - (media ** 2)
+    return soma ** 0.5
 
 
 def aplicar_precisao(dados, precisao):
