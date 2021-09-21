@@ -44,11 +44,10 @@ def nao_agrupados_hub():
     desvio = round(desvio_nao_agrupados(dados, media), precisao)
 
     print("Desvio padrão: %g" % desvio)
-    print("Coeficiente de variação: %g%%" % round(((desvio / media) * 100), precisao))
-    print(
-        "Faixa normal entre %g e %g"
-        % (round((media - desvio), precisao), round((media + desvio), precisao))
-    )
+    print("Coeficiente de variação: %g%%" % round(
+        ((desvio / media) * 100), precisao))
+    print("Faixa normal entre %g e %g" % (round(
+        (media - desvio), precisao), round((media + desvio), precisao)))
 
 
 def receber_dados_nao_agrupados(dados):
@@ -69,21 +68,15 @@ def quartil_nao_agrupados(dados, precisao):
 def print_percentil(quantil, precisao):
     for i in range(0, 10):
         print(
-            "| {:<25}".format(
-                "Percentil %d:  " % ((i + 1) * 5) + str(round(quantil[i], precisao))
-            )
-            + " | ",
+            "| {:<25}".format("Percentil %d:  " % (
+                (i + 1) * 5) + str(round(quantil[i], precisao))) + " | ",
             end="",
         )
 
         if i < 9:
-            print(
-                "{:<25}".format(
-                    "Percentil %d:  " % ((i + 11) * 5)
-                    + "{}".format(str(round(quantil[i + 10], precisao)))
-                    + " |"
-                )
-            )
+            print("{:<25}".format(
+                "Percentil %d:  " % ((i + 11) * 5) +
+                "{}".format(str(round(quantil[i + 10], precisao))) + " |"))
         else:
             print("\n")
 
@@ -91,8 +84,8 @@ def print_percentil(quantil, precisao):
 def desvio_nao_agrupados(dados, media):
     soma = 0
     for i in dados:
-        soma += (i - media) ** 2
-    return (soma / len(dados)) ** 0.5
+        soma += (i - media)**2
+    return (soma / len(dados))**0.5
 
 
 # AGRUPADOS
@@ -112,7 +105,8 @@ def agrupados_hub():
     print("Mediana: {}".format(mediana))
     print(f"Desvio padrao: {desvio_padrao}")
     print("Coeficiente de variaçao: {}".format(desvio_padrao / media) * 100)
-    print(f"Faixa normal entre {media-desvio_padrao} e {media + desvio_padrao}")
+    print(
+        f"Faixa normal entre {media-desvio_padrao} e {media + desvio_padrao}")
 
 
 def recebe_dados_agrupados(dados):
@@ -123,12 +117,12 @@ def recebe_dados_agrupados(dados):
         dados = [[1, 2, 75], [2, 3, 78], [3, 4, 128], [4, 5, 82], [5, 6, 12]]
     else:
         quant = int(input("Quantas linhas de dados serao inseridos?  "))
-        print(
-            "Digite os dados na sequencia: Limite_inferior limite_superior \
-frequencia, separados por espaço:"
-        )
+        print("Digite os dados na sequencia: Limite_inferior limite_superior \
+frequencia, separados por espaço:")
         for i in range(quant):
-            dados.append(list(map(float, input("{}° Dado:  ".format(i + 1)).split())))
+            dados.append(
+                list(map(float,
+                         input("{}° Dado:  ".format(i + 1)).split())))
 
     for i, el in enumerate(dados):
         fa += el[2]
@@ -148,36 +142,19 @@ def print_grouped_data(dados):
         soma_xifi += dados[i][5]
 
     print("=" * 84)
-    print(
-        "|"
-        + "{:^30}".format("Linf----Lsup")
-        + " | {:^10}".format("fi")
-        + " | {:^10}".format("fa")
-        + " | {:^10}".format("xi")
-        + " | {:^10}".format("xi.fi")
-        + "|"
-    )
+    print("|" + "{:^30}".format("Linf----Lsup") + " | {:^10}".format("fi") +
+          " | {:^10}".format("fa") + " | {:^10}".format("xi") +
+          " | {:^10}".format("xi.fi") + "|")
     print("-" * 84)
     for _, el in enumerate(dados):
-        print(
-            "|"
-            + "{:^30}".format("{}".format(el[0]) + " ---- {}".format(el[1]))
-            + " | {:^10}".format(el[2])
-            + " | {:^10}".format(el[3])
-            + " | {:^10}".format(el[4])
-            + " | {:^10}".format(el[5])
-            + "|"
-        )
+        print("|" +
+              "{:^30}".format("{}".format(el[0]) + " ---- {}".format(el[1])) +
+              " | {:^10}".format(el[2]) + " | {:^10}".format(el[3]) +
+              " | {:^10}".format(el[4]) + " | {:^10}".format(el[5]) + "|")
     print("-" * 84)
-    print(
-        "|"
-        + "{:^30}".format("Total (n)")
-        + " | {:^10}".format(soma_fi)
-        + " | {:^10}".format(soma_fi)
-        + " | {:^10}".format("-")
-        + " | {:^10}".format(soma_xifi)
-        + "|"
-    )
+    print("|" + "{:^30}".format("Total (n)") + " | {:^10}".format(soma_fi) +
+          " | {:^10}".format(soma_fi) + " | {:^10}".format("-") +
+          " | {:^10}".format(soma_xifi) + "|")
     print("=" * 84)
     return soma_fi, soma_xifi
 
@@ -198,7 +175,8 @@ def moda_agrupados(dados):
         d1 = dados[index][2] - dados[index - 1][2]
     d2 = dados[index][2] - dados[index + 1][2]
 
-    return dados[index][0] + ((d1) / (d1 + d2)) * (dados[index][1] - dados[index][0])
+    return dados[index][0] + ((d1) /
+                              (d1 + d2)) * (dados[index][1] - dados[index][0])
 
 
 def mediana_agrupados(dados, soma_fi):
@@ -211,18 +189,17 @@ def mediana_agrupados(dados, soma_fi):
     if index != 0:
         faa = dados[index - 1][3]
 
-    return dados[index][0] + ((vc - faa) / dados[index][2]) * (
-        dados[index][1] - dados[index][0]
-    )
+    return dados[index][0] + (
+        (vc - faa) / dados[index][2]) * (dados[index][1] - dados[index][0])
 
 
 def desvio_padrao_agrupados(dados, media):
     somatoria = 0
     for i, el in enumerate(dados):
-        somatoria += (el[4] ** 2) * el[2]
+        somatoria += (el[4]**2) * el[2]
     soma = somatoria / len(dados)
-    soma = soma - (media ** 2)
-    return soma ** 0.5
+    soma = soma - (media**2)
+    return soma**0.5
 
 
 def aplicar_precisao(dados, precisao):
